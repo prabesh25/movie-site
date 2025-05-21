@@ -18,7 +18,9 @@ function Home() {
             } catch (err) {
                 console.log(err);
                 setError("Failed to load movies");
-            } finally {
+            } 
+                // loding done hudha khari loading off garna ko lagi
+            finally {
                 setLoading(false);
             }
         };
@@ -34,10 +36,11 @@ function Home() {
 
     const handleSearch = async (e) => {
         e.preventDefault();
+        //input empty hudha khari no-search
         if (!searchQuery.trim()) return;
         if (loading) return;
         setLoading(true);
-        setError(null); // Reset error before making a new request
+        setError(null); // new request garnu vanda agadi error lai reset garna ko lagi
         try {
             const searchResults = await searchMovies(searchQuery);
             setMovies(searchResults);

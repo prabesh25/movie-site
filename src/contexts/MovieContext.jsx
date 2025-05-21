@@ -1,20 +1,24 @@
-
+//create-context global context create garna ko lagi
 import {createContext, useState, useEffect, useContext } from "react"
 
 const MovieContext = createContext()
 
+// movieContext lai use garya any-where data access garna ko lagi 
 export const useMovieContext = () => useContext(MovieContext)
 
+//wrapper vai halyo : access dina movie context lai 
 export const MovieProvider = ({children}) => {
   const [favorites, setFavorites] = useState([])  
 
   useEffect(() => {
+      // local storage ma cha vani set garcha
+
     const storedFavs = localStorage.getItem("favorites")
-    
     if(storedFavs) setFavorites(JSON.parse(storedFavs))
   },[])
 
   useEffect(() => {
+    // updated favourites lai local storage ma save garna ko lagi
      localStorage.setItem('favorites', JSON.stringify(favorites))
   },[favorites])
 
@@ -42,33 +46,6 @@ export const MovieProvider = ({children}) => {
     {children}
   </MovieContext.Provider>   
 }
-
-
-
-// // 1. Store a simple value
-// localStorage.setItem("username", "Prabesh");
-
-// // 2. Retrieve the value
-// let username = localStorage.getItem("username");
-// console.log("Username:", username); // Output: "Username: Prabesh"
-
-// // 3. Store an object (convert to JSON)
-// let user = { name: "Prabesh", age: 20 };
-// localStorage.setItem("user", JSON.stringify(user));
-
-// // 4. Retrieve the object (parse JSON back)
-// let storedUser = JSON.parse(localStorage.getItem("user"));
-// console.log("User Object:", storedUser); // Output: { name: "Prabesh", age: 20 }
-// console.log("User Name:", storedUser.name); // Output: "Prabesh"
-
-// // 5. Remove a single item
-// localStorage.removeItem("username");
-
-// // 6. Clear all localStorage data
-// localStorage.clear();
-
-
-
 
 
 
